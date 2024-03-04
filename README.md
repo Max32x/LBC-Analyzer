@@ -55,13 +55,11 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-    - [ ] Chinese
-    - [ ] Spanish
+- [x] Create Services 
+- [ ] Create Tkinter Interface
+- [ ] Import R code to Python
+- [ ] Make it work 
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

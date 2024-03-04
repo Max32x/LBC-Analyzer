@@ -4,12 +4,14 @@ Permet d'analyser de dénicher de bonnes offres sur LeBonCoin
 
 
 ```mermaid
-graph TD;
-    A[Site Web] -->|HTML| B(Extracteur de Données);
-    B -->|Données Structurées| C(Format de Données);
-    C -->|Données Prêtes| D(Stockage de Données);
-    D -->|Base de Données| E(Analyse des Données);
-    E -->|Rapports| F(Utilisateur);
+graph TB
+  subgraph LBC Analyzer
+    B -->|Données Scrappées| E(Traitement Service)
+    E -->|Données Structurées| C(Analyse Service)
+  end
+
+A(LeBonCoin) --> B(Webscrapping Service)
+C --> D(IHM - Tkinter)
 ```
 
 

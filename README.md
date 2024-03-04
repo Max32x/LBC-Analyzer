@@ -16,42 +16,24 @@ Permet d'analyser de dénicher de bonnes offres sur LeBonCoin.
 ### Prerequisites
 
 - Python
-- GitBash
-
-- A PostGre SQL Database (we used SQLite)
-- A Riot API Key (Sans cela, la première ouverture est impossible ; il y aura des messages d'erreurs.)
 
 
 ### Installation
-1. Get an API Key at [https://developer.riotgames.com/](https://developer.riotgames.com/) (_Must have an Riot Games account_)
 
-
-2. Clone the repo
+1. Clone the repo
    ```bash
-   git clone https://gitlab.com/projet-info-2a-groupe-11/outil-analyse-lol
+   git clone https://github.com/Max32x/LBC-Analyzer
    ```
 
-3. Install all the necessary libraries
+2. Install all the necessary libraries
 
    ```bash
    pip install -r requirements.txt
    ```
-
-4. Enter your API & Database Access in `.env`
-   ```js
-   API_KEY = RGAPI-e6747bea-8be1-485f-aa91-3da5d892b425
-
-   HOST=sgbd-eleves.domensai.ecole
-   PORT=5432
-   DATABASE=id2321
-   USER=id2321
-   PASSWORD=id2321
-   ```
-
-5. Execute the script
+3. Execute the script
 
    ```sh
-   python "src\__main__.py" 
+   python "main.py" 
    ```
 
 
@@ -81,7 +63,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
     - [ ] Chinese
     - [ ] Spanish
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -113,10 +94,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Authors and acknowledgment
 
-Developped by Maxime
+Developped by Maxime, under the supervision of rag(o)atzino
 
-Under the supervision of 
-
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 

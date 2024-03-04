@@ -16,7 +16,7 @@ def afficher_regression_lineaire():
 
     # Tracé de la régression linéaire
     fig = plt.figure(figsize=(6, 4), dpi=100)
-    plt.plot(superficie, prix, 'bo', label='Données')
+    plt.plot(superficie, prix, 'bo', label='Données', picker=5)  # Activer la sélection des points avec un rayon de 5 pixels
     plt.plot(superficie, poly1d_fn(superficie), 'r-', label='Régression linéaire')
     plt.xlabel('Superficie')
     plt.ylabel('Prix')
@@ -27,6 +27,21 @@ def afficher_regression_lineaire():
     canvas = FigureCanvasTkAgg(fig, master=fenetre)
     canvas.draw()
     canvas.get_tk_widget().grid(row=4, column=0, columnspan=2)
+    
+    # Connexion de la fonction on_pick à l'événement de sélection de point
+    fig.canvas.mpl_connect('pick_event', on_pick)
+
+def on_pick(event):
+    artist = event.artist
+    xmouse, ymouse = event.mouseevent.xdata, event.mouseevent.ydata
+    x, y = artist.get_xdata(), artist.get_ydata()
+    ind = event.ind
+    print('Artist picked:', event.artist)
+    print('{} vertices picked'.format(len(ind)))
+    print('Pick between vertices {} and {}'.format(min(ind), max(ind)+1))
+    print('x, y of mouse: {:.2f},{:.2f}'.format(xmouse, ymouse))
+    print('Data point:', x[ind[0]], y[ind[0]])
+    print()
 
 def rechercher():
     recherche = entry.get()

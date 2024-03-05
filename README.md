@@ -56,6 +56,10 @@ Le but de ce prgoramme est de repérer de bonnes offres en choisissant des point
 - [X] Create Tkinter Interface
 - [X] Link Interface to services
 - [ ] Make an interractive output
+- [ ] Add Autocompletion
+- [ ] Add Docker ?
+- [ ] Add pipelines ?
+
 
 
 

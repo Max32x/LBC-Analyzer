@@ -54,9 +54,8 @@ Le but de ce prgoramme est de repérer de bonnes offres en choisissant des point
 
 - [x] Create Services 
 - [X] Create Tkinter Interface
-- [ ] Link Interface to services
-- [ ] Import R code to Python
-- [ ] Output interractive output
+- [X] Link Interface to services
+- [ ] Make an interractive output
 
 
 

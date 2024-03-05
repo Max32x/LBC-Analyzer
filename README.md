@@ -30,6 +30,7 @@ Permet d'analyser de dénicher de bonnes offres sur LeBonCoin.
    ```bash
    pip install -r requirements.txt
    ```
+   
 3. Execute the script
 
    ```sh
@@ -42,12 +43,8 @@ Permet d'analyser de dénicher de bonnes offres sur LeBonCoin.
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+Le but de ce prgoramme est de repérer de bonnes offres en choisissant des points éloignées de la droite de regression.
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -56,16 +53,19 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Roadmap
 
 - [x] Create Services 
-- [ ] Create Tkinter Interface
+- [X] Create Tkinter Interface
+- [ ] Link Interface to services
 - [ ] Import R code to Python
-- [ ] Make it work 
+- [ ] Output interractive output
 
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+
 <!-- Diagram -->
 ## Diagram of Architecture
+
 ```mermaid
 graph TB
   subgraph LBC Analyzer
@@ -78,24 +78,16 @@ C --> D(IHM - Tkinter)
 ```
 
 
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 ## Project status
-The project is still in developpment.
+The project is still in developpment;
+
 
 
 
 ## Authors and acknowledgment
 
-Developped by Maxime, under the supervision of rag(o)atzino
+Developped by Maxime TIO, under the supervision of rag(o)atzino
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 

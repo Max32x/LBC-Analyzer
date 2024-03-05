@@ -18,7 +18,7 @@ import numpy as np
 
 
 
-def lbc(max):
+def lbc(max, JSON_FILE, HEADLESS_MODE = False):
 
     items = list()
 

@@ -16,57 +16,62 @@ import webbrowser
 import numpy as np
 
 
-
-
-def lbc(max, JSON_FILE, HEADLESS_MODE = False):
-
+def scrapping(recherche, ville, rayon=None, nb_pages=1):
     items = list()
 
     with sync_playwright() as p:
-        browser = p.firefox.launch(headless=HEADLESS_MODE,slow_mo=10)
- 
-        for k in range(1,max+1):
+        HEADLESS_MODE = True
+        browser = p.firefox.launch(headless=HEADLESS_MODE, slow_mo=10)
 
-            print(k)
-            time.sleep(10)
+        for page in range(1, nb_pages + 1):
+            print(page)
 
             page = browser.new_page()
-            page.goto(f"https://www.leboncoin.fr/recherche?category=8&text=maison&locations=Nice__43.722754661301785_7.246854356769285_8588_30000&page={k}")
-            
+            page.goto(f"https://www.leboncoin.fr/recherche?category=8&text={recherche}&locations={ville}__undefined_undefined_undefined_{rayon}&page={page}")
 
-            time.sleep(1)
+            # time.sleep(1)
 
             try:
-                time.sleep(2)
+                # time.sleep(2)
                 accept_cookies_button = page.locator("button#didomi-notice-agree-button")
                 accept_cookies_button.click()
-
-            except :
+            except:
                 pass
-        
-            try : 
+
+            try:
                 # Get HTML source code
                 html_source_code = page.content()
 
                 # Parsing HTML
                 soup = BeautifulSoup(html_source_code, "html.parser")
 
-                
-                json_content = soup.find("script", {"type":"application/json"}).text
+                json_content = soup.find("script", {"type": "application/json"}).text
                 datas = json.loads(json_content)
                 items += datas["props"]["pageProps"]["searchData"]["ads"]
+
             except:
-                print(f"pass {k}")
+                print(f"pass {page}")
                 pass
 
-        print(f"Écriture des données dans le fichier : {JSON_FILE}")
+
+        # Créer le dossier "data" s'il n'existe pas
+        data_folder = "data_search"
+        if not os.path.exists(data_folder):
+            os.makedirs(data_folder)
+
+        # Changer le chemin du fichier pour inclure le dossier "data"
+        json_file_name = os.path.join(data_folder, f"{recherche}-{ville}-search-LBC.json")
+
+        print(f"Écriture des données dans le fichier : {json_file_name}")
+
+        with open(json_file_name, mode="w") as jsonfile:
+            json.dump(items, jsonfile, indent=2)
+
+        print("Fichier enregistré dans :", os.path.abspath(json_file_name))
+        print("Nombre d'annonces :", len(items))
+        browser.close()
         
 
 
-        print("Fichier enregistré dans :", os.getcwd())
-        print("Nombre d'annonces :", len(items))
 
-        with open(JSON_FILE, mode="w") as jsonfile:
-            json.dump(items, jsonfile, indent=2)
 
-        browser.close()

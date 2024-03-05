@@ -4,6 +4,10 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 
+from serivces.serviceScrapping import scrapping
+from serivces.serviceTraitement import traitement
+from serivces.serviceAffichage import affiche
+
 class FenetreRecherche(tk.Tk):
     def __init__(self):
         super().__init__()
@@ -42,10 +46,16 @@ class FenetreRecherche(tk.Tk):
         recherche = self.entry.get()
         ville = self.entry_ville.get()  # Récupérer le contenu de l'entrée de la ville
 
-        # Autres actions à effectuer lors de la recherche
-        print(f"Recherche en cours avec le terme '{recherche}' dans la ville '{ville}'")
-        self.afficher_regression_lineaire()
 
+        # rayon = 100
+        # page= 2
+
+        print(f"Recherche en cours avec le terme '{recherche}' dans la ville '{ville}'")
+
+        scrapping(recherche , ville , nb_pages=1)
+        traitement(recherche , ville)
+        affiche(recherche, ville,  interactif=False)
+        # self.afficher_regression_lineaire()
 
     def afficher_regression_lineaire(self):
         # Génération de fausses données pour la démonstration
@@ -67,12 +77,10 @@ class FenetreRecherche(tk.Tk):
         plt.legend()
         plt.grid(True)
         
-        canvas = FigureCanvasTkAgg(fig, master=self)
-        canvas.draw()
-        canvas.get_tk_widget().grid(row=4, column=0, columnspan=2)
-        
+
         # Connexion de la fonction on_pick à l'événement de sélection de point
         fig.canvas.mpl_connect('pick_event', self.on_pick)
+        plt.show()
 
     def on_pick(self, event):
         artist = event.artist

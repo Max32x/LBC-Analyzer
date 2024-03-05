@@ -19,9 +19,12 @@ import dash
 
 
 
-def affiche(interactif=False):
+def affiche(recherche, ville, interactif=False):
+
     # Chargement des données
-    data = pd.read_csv("search-leboncoin.csv")
+    csv_file_name = os.path.join("data_search", f"{recherche}-{ville}-search-LBC.csv")
+    data = pd.read_csv(csv_file_name)
+
 
     data['first_publication_date'] = pd.to_datetime(data['first_publication_date'], format="%Y-%m-%d %H:%M:%S")
 
@@ -40,7 +43,8 @@ def affiche(interactif=False):
 
 
     if not interactif : 
-        # Création du graphique interactif
+
+        
         fig = px.scatter(filtered_data, x='surface_hab', y='price', color='distance', size=critere.map({True: 0.5, False: 0.01}) , 
                         title='Prix vs Surface habitable',
                         labels={'surface_hab': 'Surface habitable', 'price': 'Prix'}, 
@@ -51,11 +55,9 @@ def affiche(interactif=False):
 
 
     else : 
-        print("je suis la ")
 
+        # Création du graphique non interactif
         f = go.FigureWidget([go.Scatter(x=filtered_data["surface_hab"], y=filtered_data["price"], mode='markers')])
-
-        help(go.FigureWidget)
 
         scatter = f.data[0]
         colors = ['#a3a7e4'] * len(filtered_data)
@@ -64,6 +66,7 @@ def affiche(interactif=False):
         f.layout.hovermode = 'closest'
 
         print('ok')
+        
         def do_click(trace, points, state):
             print('22222222222')
             if points.point_inds:
@@ -83,4 +86,4 @@ def affiche(interactif=False):
             dcc.Graph(figure=f)
         ])
 
-        # app.run_server(debug=True)  # Turn off reloader if inside Jupyter
+        app.run_server(debug=True)  # Turn off reloader if inside Jupyter

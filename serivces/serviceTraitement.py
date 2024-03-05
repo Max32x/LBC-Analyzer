@@ -17,16 +17,18 @@ import numpy as np
 
 
 
+def traitement(recherche, ville):
 
-def traitement():
-    df = pd.read_json(JSON_FILE)
+    json_file_name = os.path.join("data_search", f"{recherche}-{ville}-search-LBC.json")
+    
+    df = pd.read_json(json_file_name)
 
 
     def extract_value(row, key):
         for dico in row["attributes"]:
             if dico["key"] == key:
                 return dico["value"]
-        return None  # If the key is not found, return None or another default value
+        return None  # If the key is not found,     return None or another default value
 
     def extract_value2(row, key):
         return row["location"][key]
@@ -45,4 +47,9 @@ def traitement():
     df["price"] =df["price_cents"]/100
     df = df[~df['subject'].str.contains('terrain', case=False)]
 
-    df.to_csv (r'search-leboncoin.csv', index = None)
+    csv_file_name = os.path.join("data_search", f"{recherche}-{ville}-search-LBC.csv")
+
+
+    df.to_csv (csv_file_name, index = None)
+
+    print("Traitement fini")

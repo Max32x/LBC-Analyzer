@@ -20,7 +20,7 @@ JSON_FILE = "search-leboncoin.json"
 SEARCH_TERM = "maison"
 VERBOSE = False
 
-new_directory = "C:\Maxime\Informatique perso\scrapping sites annonce"
+new_directory = "/home/ensai/COURS/Conception Logicielle/LBC-Analyzer"
 os.chdir(new_directory)
 
 def lbc(max):

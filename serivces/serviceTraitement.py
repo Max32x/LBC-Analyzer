@@ -48,8 +48,6 @@ def traitement(recherche, ville):
     df = df[~df['subject'].str.contains('terrain', case=False)]
 
     csv_file_name = os.path.join("data_search", f"{recherche}-{ville}-search-LBC.csv")
-
-
     df.to_csv (csv_file_name, index = None)
 
     print("Traitement fini")

@@ -34,64 +34,34 @@ class FenetreRecherche(tk.Tk):
         # Sélecteur de catégorie
         label_categorie = ttk.Label(cadre, text="Catégorie :")
         label_categorie.grid(row=2, column=0, padx=5, pady=5)
-        self.choix_categorie = ttk.Combobox(cadre, values=["Logement", "Véhicule"], width=27)
+        self.choix_categorie = ttk.Combobox(cadre, values=["Logement", "Véhicule", "Autre"], width=27)
         self.choix_categorie.current(0)  # Sélection par défaut
         self.choix_categorie.grid(row=2, column=1, padx=5, pady=5)
 
+        # **New Slider**
+        self.label_prix = ttk.Label(cadre, text="Rayon :")
+        self.label_prix.grid(row=3, column=0, padx=5, pady=5)
+        self.rayon_slider = ttk.Scale(cadre, from_=0, to=200, orient=tk.HORIZONTAL)
+        self.rayon_slider.grid(row=3, column=1, padx=5, pady=5)
+
         # Bouton de recherche
         bouton_rechercher = ttk.Button(cadre, text="Rechercher", command=self.rechercher)
-        bouton_rechercher.grid(row=3, column=0, columnspan=2, pady=10)
+        bouton_rechercher.grid(row=4, column=0, columnspan=2, pady=10)
 
     def rechercher(self):
         recherche = self.entry_search.get().lower()
         ville = self.entry_ville.get().lower()
-
+        choix_categorie= self.choix_categorie.get().lower()
 
         print(f"Recherche en cours avec le terme '{recherche}' dans la ville '{ville}'")
 
-        scrapping(recherche, ville )
+        scrapping(recherche, ville, category= choix_categorie )
         traitement(recherche , ville)
-        affiche(recherche, ville)
-        # self.afficher_regression_lineaire()
+        affiche(recherche, ville, category=choix_categorie)
 
-    def afficher_regression_lineaire(self):
-        # Génération de fausses données pour la démonstration
-        np.random.seed(0)
-        superficie = np.random.randint(50, 200, 100)
-        prix = 50 + 2.5 * superficie + np.random.normal(0, 20, 100)
 
-        # Calcul de la régression linéaire
-        coef = np.polyfit(superficie, prix, 1)
-        poly1d_fn = np.poly1d(coef)
 
-        # Tracé de la régression linéaire
-        fig = plt.figure(figsize=(6, 4), dpi=100)
-        plt.plot(superficie, prix, 'bo', label='Données', picker=5)  # Activer la sélection des points avec un rayon de 5 pixels
-        plt.plot(superficie, poly1d_fn(superficie), 'r-', label='Régression linéaire')
-        plt.xlabel('Superficie')
-        plt.ylabel('Prix')
-        plt.title('Régression linéaire : Prix en fonction de la superficie')
-        plt.legend()
-        plt.grid(True)
-        
-
-        # Connexion de la fonction on_pick à l'événement de sélection de point
-        fig.canvas.mpl_connect('pick_event', self.on_pick)
-        plt.show()
-
-    def on_pick(self, event):
-        artist = event.artist
-        xmouse, ymouse = event.mouseevent.xdata, event.mouseevent.ydata
-        x, y = artist.get_xdata(), artist.get_ydata()
-        ind = event.ind
-        print('Artist picked:', event.artist)
-        print('{} vertices picked'.format(len(ind)))
-        print('Pick between vertices {} and {}'.format(min(ind), max(ind)+1))
-        print('x, y of mouse: {:.2f},{:.2f}'.format(xmouse, ymouse))
-        print('Data point:', x[ind[0]], y[ind[0]])
-        print()
 
 if __name__ == "__main__":
-    print('ayo')
     app = FenetreRecherche()
     app.mainloop()

@@ -43,12 +43,14 @@ def affiche(recherche, ville, category=None, mode=1):
 
     if category == 'logement':
         x_name = "surface_hab"
-    elif category == 'vehicule':
+    elif category == 'véhicule':
         x_name = "kilometrage"
     else:
         x_name = "first_publication_date"
 
-    if mode == 1:
+
+    if mode == 1: #option pas trop mal
+
         fig = px.scatter(filtered_data, x=x_name, y='price', color='distance', size=critere.map({True: 0.5, False: 0.01}),
                          title='Prix vs Surface habitable',
                          labels={'surface_hab': 'Surface habitable', 'price': 'Prix'},
@@ -56,7 +58,9 @@ def affiche(recherche, ville, category=None, mode=1):
                          trendline="ols", trendline_scope="overall", trendline_color_override="black")
         # Affichage du graphique
 
-        
+                # Connexion de la fonction on_pick à l'événement de sélection de point
+        fig.canvas.mpl_connect('pick_event', on_pick)
+        plt.show()
         fig.show()
 
 
@@ -86,6 +90,8 @@ def affiche(recherche, ville, category=None, mode=1):
 
 
     elif mode ==3:
+        from plotly.callbacks import Points, InputDeviceState
+        points, state = Points(), InputDeviceState()
 
         fig = go.FigureWidget([go.Scatter(x= filtered_data[x_name], y=filtered_data['price'], mode='markers')])
 
@@ -114,18 +120,60 @@ def affiche(recherche, ville, category=None, mode=1):
         scatter.on_click(update_point)
 
         print("show")
+        fig.show()
 
-
-
-
-"""         from plotly.callbacks import Points, InputDeviceState
-        points, state = Points(), InputDeviceState()
         
         def click_fn(trace, points, state):
             inds = points.point_inds
             # Do something
+            print('zizo')
         
         trace = go.Scatter(x=[1, 2], y=[3, 0])
-        trace.on_click(click_fn)  """
+        trace.on_click(click_fn) 
+        trace.show()
 
-affiche('maison', 'rennes', category= "logement",mode=3)
+
+    if mode ==4: 
+        def on_pick(self, event):
+            artist = event.artist
+            xmouse, ymouse = event.mouseevent.xdata, event.mouseevent.ydata
+            x, y = artist.get_xdata(), artist.get_ydata()
+            ind = event.ind
+            print('Artist picked:', event.artist)
+            print('{} vertices picked'.format(len(ind)))
+            print('Pick between vertices {} and {}'.format(min(ind), max(ind)+1))
+            print('x, y of mouse: {:.2f},{:.2f}'.format(xmouse, ymouse))
+            print('Data point:', x[ind[0]], y[ind[0]])
+            print()
+
+
+        # Génération de fausses données pour la démonstration
+        np.random.seed(0)
+        superficie = np.random.randint(50, 200, 100)
+        prix = 50 + 2.5 * superficie + np.random.normal(0, 20, 100)
+
+        # Calcul de la régression linéaire
+        coef = np.polyfit(superficie, prix, 1)
+        poly1d_fn = np.poly1d(coef)
+
+        # Tracé de la régression linéaire
+        fig = plt.figure(figsize=(6, 4), dpi=100)
+        plt.plot(superficie, prix, 'bo', label='Données', picker=5)  # Activer la sélection des points avec un rayon de 5 pixels
+        plt.plot(superficie, poly1d_fn(superficie), 'r-', label='Régression linéaire')
+        plt.xlabel('Superficie')
+        plt.ylabel('Prix')
+        plt.title('Régression linéaire : Prix en fonction de la superficie')
+        plt.legend()
+        plt.grid(True)
+        
+
+        # Connexion de la fonction on_pick à l'événement de sélection de point
+        fig.canvas.mpl_connect('pick_event', on_pick)
+        plt.show()
+
+
+
+
+if __name__ == "__main__":
+    affiche('maison', 'rennes', category= "logement",mode=4)    
+

@@ -16,8 +16,17 @@ import webbrowser
 import numpy as np
 
 
-def scrapping(recherche, ville, rayon=None, nb_pages=5):
+def scrapping(recherche, ville, category=None, rayon=None, nb_pages=5):
+
     items = list()
+
+    #https://durieux.me/projects/leboncoin.html
+    if category == "logement":
+        id_category=8 # IMMOBILIER
+    elif category == "véhicule":
+        id_category=1 # VEHICULES
+    else :
+        id_category=0 #autre
 
     with sync_playwright() as p:
         HEADLESS_MODE = True
@@ -27,10 +36,9 @@ def scrapping(recherche, ville, rayon=None, nb_pages=5):
             print("page : ",page_index)
 
             page = browser.new_page()
-            page.goto(f"https://www.leboncoin.fr/recherche?text={recherche}&locations={ville}__undefined_undefined_undefined_{rayon}&page={page_index}")
+            page.goto(f"https://www.leboncoin.fr/recherche?category={id_category}&text={recherche}&locations={ville}__undefined_undefined_undefined_{rayon}&page={page_index}")
 
             # time.sleep(1)
-            #page.goto(f"https://www.leboncoin.fr/recherche?category=8&text={recherche}&locations={ville}__undefined_undefined_undefined_{rayon}&page={page_index}")
 
             try:
                 # time.sleep(2)
@@ -75,4 +83,7 @@ def scrapping(recherche, ville, rayon=None, nb_pages=5):
 
 
 
+
+if __name__ == "__main__":
+    scrapping('z650', 'rennes', nb_pages=1 )    
 

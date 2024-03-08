@@ -16,74 +16,116 @@ import webbrowser
 import numpy as np
 
 import dash
+import plotly.graph_objects as go
 
-
-
-def affiche(recherche, ville, interactif=False):
+def affiche(recherche, ville, category=None, mode=1):
 
     # Chargement des données
     csv_file_name = os.path.join("data_search", f"{recherche}-{ville}-search-LBC.csv")
     data = pd.read_csv(csv_file_name)
-
 
     data['first_publication_date'] = pd.to_datetime(data['first_publication_date'], format="%Y-%m-%d %H:%M:%S")
 
     # Filtrage des données
     filtered_data = data[(data['surface_hab'] <= 4000) &   
                          (data['price'] > 15000)]
+    
+    filtered_data = data
 
-    prix_min =900000
-    prix_max =1200000
+    prix_min = 0
+    prix_max = 1200000
     surface_min = 0
     surface_max = 280
 
-    # # Ajout de la condition pour le critère
+    # Ajout de la condition pour le critère
     critere = ((filtered_data['price'] > prix_min) & (filtered_data['price'] < prix_max) & 
-            (filtered_data['surface_hab'] > surface_min) & (filtered_data['surface_hab'] < surface_max) )
+               (filtered_data['surface_hab'] > surface_min) & (filtered_data['surface_hab'] < surface_max))
 
+    if category == 'logement':
+        x_name = "surface_hab"
+    elif category == 'vehicule':
+        x_name = "kilometrage"
+    else:
+        x_name = "first_publication_date"
 
-    if not interactif : 
+    if mode == 1:
+        fig = px.scatter(filtered_data, x=x_name, y='price', color='distance', size=critere.map({True: 0.5, False: 0.01}),
+                         title='Prix vs Surface habitable',
+                         labels={'surface_hab': 'Surface habitable', 'price': 'Prix'},
+                         hover_data={'subject': True, 'url': True},
+                         trendline="ols", trendline_scope="overall", trendline_color_override="black")
+        # Affichage du graphique
 
         
-        fig = px.scatter(filtered_data, x='surface_hab', y='price', color='distance', size=critere.map({True: 0.5, False: 0.01}) , 
-                        title='Prix vs Surface habitable',
-                        labels={'surface_hab': 'Surface habitable', 'price': 'Prix'}, 
-                        hover_data={'subject': True, 'url': True},
-                        trendline="ols", trendline_scope="overall", trendline_color_override="black")
-        # Affichage du graphique
         fig.show()
 
 
-    else : 
 
-        # Création du graphique non interactif
-        f = go.FigureWidget([go.Scatter(x=filtered_data["surface_hab"], y=filtered_data["price"], mode='markers')])
+    elif mode ==2 : #fonctionne pas
+        plt.figure()
+        sc = plt.scatter(filtered_data[x_name], filtered_data['price'], c=filtered_data['distance'], s=critere.map({True: 0.5, False: 0.01}))
+        plt.xlabel(x_name)
+        plt.ylabel('Prix')
+        plt.colorbar(sc)
+        
+        def on_pick(self, event):
+            artist = event.artist
+            xmouse, ymouse = event.mouseevent.xdata, event.mouseevent.ydata
+            x, y = artist.get_xdata(), artist.get_ydata()
+            ind = event.ind
+            print('Artist picked:', event.artist)
+            print('{} vertices picked'.format(len(ind)))
+            print('Pick between vertices {} and {}'.format(min(ind), max(ind)+1))
+            print('x, y of mouse: {:.2f},{:.2f}'.format(xmouse, ymouse))
+            print('Data point:', x[ind[0]], y[ind[0]])
+            print()
 
-        scatter = f.data[0]
-        colors = ['#a3a7e4'] * len(filtered_data)
+        plt.gcf().canvas.mpl_connect('pick_event', on_pick)
+        plt.show()
+
+
+
+    elif mode ==3:
+
+        fig = go.FigureWidget([go.Scatter(x= filtered_data[x_name], y=filtered_data['price'], mode='markers')])
+
+        n = len(filtered_data)
+        scatter = fig.data[0]  
+        colors = ['#a3a7e4'] * n
         scatter.marker.color = colors
-        # scatter.marker.size = critere.map({True: 2, False: 1})
-        f.layout.hovermode = 'closest'
-
-        print('ok')
+        scatter.marker.size = [10] * n
+        fig.layout.hovermode = 'closest'   
         
-        def do_click(trace, points, state):
-            print('22222222222')
-            if points.point_inds:
-                ind = points.point_inds[0]
-                url = filtered_data.url.iloc[ind]
-                webbrowser.open_new_tab(url)
-
-        scatter.on_click(do_click)
-        f
         
+        
+           # create our callback function
+        def update_point(trace, points, selector):
 
-        from dash import Dash, dcc, html
+            print('caca')
+            c = list(scatter.marker.color)
+            s = list(scatter.marker.size)
+            for i in points.point_inds:
+                c[i] = '#bae2be'
+                s[i] = 20
+                with fig.batch_update():
+                    scatter.marker.color = c
+                    scatter.marker.size = s
 
-        app = Dash()
+        scatter.on_click(update_point)
 
-        app.layout = html.Div([
-            dcc.Graph(figure=f)
-        ])
+        print("show")
 
-        app.run_server(debug=True)  # Turn off reloader if inside Jupyter
+
+
+
+"""         from plotly.callbacks import Points, InputDeviceState
+        points, state = Points(), InputDeviceState()
+        
+        def click_fn(trace, points, state):
+            inds = points.point_inds
+            # Do something
+        
+        trace = go.Scatter(x=[1, 2], y=[3, 0])
+        trace.on_click(click_fn)  """
+
+affiche('maison', 'rennes', category= "logement",mode=3)

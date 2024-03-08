@@ -22,8 +22,8 @@ class FenetreRecherche(tk.Tk):
         # Barre de recherche
         self.label_recherche = ttk.Label(cadre, text="Rechercher :")
         self.label_recherche.grid(row=0, column=0, padx=5, pady=5)
-        self.entry = ttk.Entry(cadre, width=30)
-        self.entry.grid(row=0, column=1, padx=5, pady=5)
+        self.entry_search = ttk.Entry(cadre, width=30)
+        self.entry_search.grid(row=0, column=1, padx=5, pady=5)
 
         # Barre de recherche pour la ville
         label_ville = ttk.Label(cadre, text="Ville :")
@@ -43,18 +43,15 @@ class FenetreRecherche(tk.Tk):
         bouton_rechercher.grid(row=3, column=0, columnspan=2, pady=10)
 
     def rechercher(self):
-        recherche = self.entry.get()
-        ville = self.entry_ville.get()  # Récupérer le contenu de l'entrée de la ville
+        recherche = self.entry_search.get().lower()
+        ville = self.entry_ville.get().lower()
 
-
-        # rayon = 100
-        # page= 2
 
         print(f"Recherche en cours avec le terme '{recherche}' dans la ville '{ville}'")
 
-        scrapping(recherche , ville , nb_pages=1)
+        scrapping(recherche, ville )
         traitement(recherche , ville)
-        affiche(recherche, ville,  interactif=False)
+        affiche(recherche, ville)
         # self.afficher_regression_lineaire()
 
     def afficher_regression_lineaire(self):

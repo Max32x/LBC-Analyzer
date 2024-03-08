@@ -16,7 +16,7 @@ import webbrowser
 import numpy as np
 
 
-def scrapping(recherche, ville, rayon=None, nb_pages=1):
+def scrapping(recherche, ville, rayon=None, nb_pages=5):
     items = list()
 
     with sync_playwright() as p:
@@ -24,7 +24,7 @@ def scrapping(recherche, ville, rayon=None, nb_pages=1):
         browser = p.firefox.launch(headless=HEADLESS_MODE, slow_mo=10)
 
         for page in range(1, nb_pages + 1):
-            print(page)
+            print("page : ",page)
 
             page = browser.new_page()
             page.goto(f"https://www.leboncoin.fr/recherche?category=8&text={recherche}&locations={ville}__undefined_undefined_undefined_{rayon}&page={page}")
@@ -54,7 +54,7 @@ def scrapping(recherche, ville, rayon=None, nb_pages=1):
                 pass
 
 
-        # Créer le dossier "data" s'il n'existe pas
+        # Créer le dossier "data_search" s'il n'existe pas
         data_folder = "data_search"
         if not os.path.exists(data_folder):
             os.makedirs(data_folder)

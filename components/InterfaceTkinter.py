@@ -43,7 +43,7 @@ class FenetreRecherche(tk.Tk):
         self.label_prix = ttk.Label(cadre, text="Rayon :")
         self.label_prix.grid(row=3, column=0, padx=5, pady=5)
         self.rayon_slider = ttk.Scale(cadre, from_=0, to=200, orient=tk.HORIZONTAL)
-        self.rayon_slider.current(20)  # Sélection par défaut
+        self.rayon_slider.set(20) #Vaaleur par defaut
         self.rayon_slider.grid(row=3, column=1, padx=5, pady=5)
 
         # Bouton de recherche
@@ -65,6 +65,13 @@ class FenetreRecherche(tk.Tk):
             scrapping(recherche, ville, category=choix_categorie, zip_code=zip_code, rayon= rayon, latitude=latitude, longitude=longitude)
             traitement(recherche , ville, latitude, longitude)
             affiche(recherche, ville, category=choix_categorie)
+
+        elif ville == "" :
+            print(f"Recherche en cours avec le terme '{recherche}' dans toute la France dans la categorie '{choix_categorie}'")
+
+            scrapping(recherche, ville, category=choix_categorie, zip_code="", rayon= "", latitude="", longitude="")
+            traitement(recherche , ville, latitude="", longitude="")
+            affiche(recherche, ville, choix_categorie)
 
         else : 
             print("Nom de la ville non reconnu")

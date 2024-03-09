@@ -17,7 +17,7 @@ import numpy as np
 
 
 
-def traitement(recherche, ville, latitude, longitude) :
+def traitement(recherche, ville, latitude= None, longitude=None) :
 
     json_file_name = os.path.join("data_search", f"{recherche}-{ville}-search-LBC.json")
     
@@ -52,8 +52,11 @@ def traitement(recherche, ville, latitude, longitude) :
     df["longitude"] = df.apply(lambda row: extract_value2(row, "lng"), axis=1)
     df["latitude"] = df.apply(lambda row: extract_value2(row, "lat"), axis=1)
 
-    df["distance"] = df.apply(lambda row: math.sqrt((row["latitude"] - latitude)**2 + (row["longitude"] - longitude)**2), axis=1)
-
+    if latitude and longitude : 
+        df["distance"] = df.apply(lambda row: math.sqrt((row["latitude"] - latitude)**2 + (row["longitude"] - longitude)**2), axis=1)
+    else :
+        df["distance"] = df.apply(lambda x:None, axis=1)
+         
 
 
     csv_file_name = os.path.join("data_search", f"{recherche}-{ville}-search-LBC.csv")

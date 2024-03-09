@@ -57,6 +57,8 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 - [X] Create Tkinter Interface
 - [X] Link Interface to services
 - [ ] Make an interractive output (hard) 
+- [ ] Add filter
+
 - [ ] Add Docker ?
 - [ ] Add pipelines ?
 - [ ] Test with Mocker

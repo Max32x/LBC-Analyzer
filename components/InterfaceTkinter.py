@@ -39,10 +39,7 @@ class FenetreRecherche(tk.Tk):
         self.choix_categorie.current(0)  # Sélection par défaut
         self.choix_categorie.grid(row=2, column=1, padx=5, pady=5)
 
-        # **New Slider**
-                
-     
-
+        # Slider de rayon
         self.rayon_val = tk.IntVar(cadre)
         self.rayon_val.set(20) #Valeur par defaut
 
@@ -61,7 +58,6 @@ class FenetreRecherche(tk.Tk):
 
     def accept_whole_number_only(self, e=None):
         value = self.rayon_slider.get()
-        print(value)
         if int(value) != value:
             self.rayon_slider.set(round(value))
 

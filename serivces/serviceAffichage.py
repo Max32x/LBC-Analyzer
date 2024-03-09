@@ -114,18 +114,14 @@ def affiche(recherche, ville, category=None, mode=1):
 
         scatter.on_click(update_point)
 
-        print("show")
-        fig.show()
+        from dash import Dash, dcc, html
 
-        
-        def click_fn(trace, points, state):
-            inds = points.point_inds
-            # Do something
-            print('zizo')
-        
-        trace = go.Scatter(x=[1, 2], y=[3, 0])
-        trace.on_click(click_fn) 
-        trace.show()
+        app = Dash()
+        app.layout = html.Div([
+            dcc.Graph(figure=fig)
+        ])
+
+        app.run_server(debug=True, use_reloader=False)  # Turn off reloader if inside Jupyter
 
 
     if mode ==4: 
@@ -167,11 +163,57 @@ def affiche(recherche, ville, category=None, mode=1):
         plt.show()
 
     if mode ==5: 
-        pass
+        # Import libraries
+
+        import json
+        import ipywidgets as widgets
+
+        x=np.random.uniform(-10,10,size=50)
+        y=np.sin(x)
+
+        fig=go.FigureWidget([go.Scatter(x=x, y=y, mode='markers'), go.Scatter(x=[], y=[], mode="lines")])
+
+        fig.update_layout(template='simple_white')
+
+        scatter=fig.data[0]
+        line = fig.data[1]
+        colors=['#a3a7e4']*100
+        scatter.marker.color=colors
+        scatter.marker.size=[10]*100
+        fig.layout.hovermode='closest'
+
+        fig.update_traces(marker=dict(line=dict(color='DarkSlateGrey')))
+
+        out = widgets.Output(layout={'border': '1px solid black'})
+        out.append_stdout('Output appended with append_stdout\n')
+
+        # create our callback function
+        @out.capture()
+        def update_point(trace, points, selector):
+            x = list(line.x) + points.xs
+            y = list(line.y) + points.ys
+            line.update(x=x, y=y)
+        scatter.on_click(update_point)
+
+        reset = widgets.Button(description="Reset")
+        export = widgets.Button(description="Export")
+
+        @out.capture()
+        def on_reset_clicked(b):
+            line.update(x=[], y=[])
+            out.clear_output()
+        @out.capture()
+        def on_export_clicked(b):
+            print(fig.to_dict()["data"][1])
+
+        reset.on_click(on_reset_clicked)
+        export.on_click(on_export_clicked)
+
+        widgets.VBox([widgets.HBox([reset, export]), widgets.VBox([fig, out])])
         # https://stackoverflow.com/questions/70628787/python-interactive-plotting-with-click-events
 
 
 if __name__ == "__main__":
     # affiche('maison', 'rennes', category= "logement",mode=4)    
 
-    affiche('z650', 'rennes', category= "véhicule",mode=1)    
+    affiche('z650', 'rennes', category= "véhicule",mode=4)    

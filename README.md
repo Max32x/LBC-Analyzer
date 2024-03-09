@@ -51,7 +51,7 @@ Le but de ce prgoramme est de repérer de bonnes offres à l'aide d'outil statis
 On définit un terme de recherche, et un localisation. Le logiciel s'occupe de repertoirer toute les aannonces correspondantes et faire une regression.
 Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de regression
 
-![voir exmaple](https://prnt.sc/CrT7QdXN9LGz)
+![voir exmaple](https://img001.prntscr.com/file/img001/tfl2GI40TgaUAZHHj8mn8w.png)
 
 
 <!-- ROADMAP -->

@@ -27,7 +27,7 @@ class FenetreRecherche(tk.Tk):
         self.entry_search.grid(row=0, column=1, padx=5, pady=5)
 
         # Barre de recherche pour la ville
-        label_ville = ttk.Label(cadre, text="Ville :")
+        label_ville = ttk.Label(cadre, text="Ville (Toute la France = Laisser vide) :")
         label_ville.grid(row=1, column=0, padx=5, pady=5)
         self.entry_ville = ttk.Entry(cadre, width=30)
         self.entry_ville.grid(row=1, column=1, padx=5, pady=5)
@@ -40,15 +40,32 @@ class FenetreRecherche(tk.Tk):
         self.choix_categorie.grid(row=2, column=1, padx=5, pady=5)
 
         # **New Slider**
-        self.label_prix = ttk.Label(cadre, text="Rayon :")
+                
+     
+
+        self.rayon_val = tk.IntVar(cadre)
+        self.rayon_val.set(20) #Valeur par defaut
+
+        self.label_prix = ttk.Label(cadre, text="Rayon (km) :" )
         self.label_prix.grid(row=3, column=0, padx=5, pady=5)
-        self.rayon_slider = ttk.Scale(cadre, from_=0, to=200, orient=tk.HORIZONTAL)
-        self.rayon_slider.set(20) #Vaaleur par defaut
+
+
+        scale_lbl = tk.Label(cadre, textvariable=self.rayon_val)
+        scale_lbl.grid(row=3, column=2, padx=5, pady=5)
+        self.rayon_slider = ttk.Scale(cadre, from_=0, to=200, variable = self.rayon_val, orient=tk.HORIZONTAL, command=self.accept_whole_number_only)
         self.rayon_slider.grid(row=3, column=1, padx=5, pady=5)
 
         # Bouton de recherche
         bouton_rechercher = ttk.Button(cadre, text="Rechercher", command=self.rechercher)
         bouton_rechercher.grid(row=4, column=0, columnspan=2, pady=10)
+
+    def accept_whole_number_only(self, e=None):
+        value = self.rayon_slider.get()
+        print(value)
+        if int(value) != value:
+            self.rayon_slider.set(round(value))
+
+
 
     def rechercher(self):
         recherche = self.entry_search.get().lower()
@@ -75,6 +92,7 @@ class FenetreRecherche(tk.Tk):
 
         else : 
             print("Nom de la ville non reconnu")
+
 
 
 

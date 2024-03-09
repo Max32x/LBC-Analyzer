@@ -5,9 +5,12 @@
 
 <!-- DESCRIPTION -->
 ## Description
-Permet d'analyser de dénicher de bonnes offres sur LeBonCoin.
+Le but de ce programme est de repérer de bonnes offres sur LeBonCoin à l'aide d'outils statistiques.
 
+On définit un terme de recherche, et un localisation. Le logiciel s'occupe de repertoirer toute les aannonces correspondantes et faire une regression.
+Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de regression
 
+![voir exmaple](https://img001.prntscr.com/file/img001/tfl2GI40TgaUAZHHj8mn8w.png)
 
 
 <!-- GETTING STARTED -->
@@ -38,21 +41,14 @@ Permet d'analyser de dénicher de bonnes offres sur LeBonCoin.
    ```
 
 
-
-
-
 <!-- USAGE EXAMPLES -->
 ## Usage
-Le but de ce prgoramme est de repérer de bonnes offres à l'aide d'outil statistiques.
 
-
-
-
-On définit un terme de recherche, et un localisation. Le logiciel s'occupe de repertoirer toute les aannonces correspondantes et faire une regression.
-Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de regression
-
-![voir exmaple](https://img001.prntscr.com/file/img001/tfl2GI40TgaUAZHHj8mn8w.png)
-
+- Renseigner un terme de recherche
+- Renseigner une ville
+- Choisir une categorie (seules celle jugées utiles y sont)
+- Choisir un rayon de recherche
+- Admirer le travail
 
 <!-- ROADMAP -->
 ## Roadmap

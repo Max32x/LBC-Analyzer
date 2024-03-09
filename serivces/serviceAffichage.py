@@ -99,7 +99,7 @@ def affiche(recherche, ville, category=None, mode=1):
         
         
         
-           # create our callback function
+        # create our callback function
         def update_point(trace, points, selector):
 
             print('caca')
@@ -216,4 +216,4 @@ def affiche(recherche, ville, category=None, mode=1):
 if __name__ == "__main__":
     # affiche('maison', 'rennes', category= "logement",mode=4)    
 
-    affiche('z650', 'rennes', category= "véhicule",mode=4)    
+    affiche('z650', 'rennes', category= "véhicule",mode=1)    

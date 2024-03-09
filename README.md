@@ -63,6 +63,8 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 - [ ] Make an interractive output (hard) 
 - [ ] Add Docker ?
 - [ ] Add pipelines ?
+- [ ] Test with Mocker
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

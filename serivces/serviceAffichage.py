@@ -52,15 +52,10 @@ def affiche(recherche, ville, category=None, mode=1):
     if mode == 1: #option pas trop mal
 
         fig = px.scatter(filtered_data, x=x_name, y='price', color='distance', size=critere.map({True: 0.5, False: 0.01}),
-                         title='Prix vs Surface habitable',
-                         labels={'surface_hab': 'Surface habitable', 'price': 'Prix'},
+                         labels={'surface_hab': 'Surface habitable', 'price': 'Prix', 'first_publication_date':'Date de publication', "kilometrage": 'Kilometrage'},
                          hover_data={'subject': True, 'url': True},
                          trendline="ols", trendline_scope="overall", trendline_color_override="black")
         # Affichage du graphique
-
-                # Connexion de la fonction on_pick à l'événement de sélection de point
-        fig.canvas.mpl_connect('pick_event', on_pick)
-        plt.show()
         fig.show()
 
 
@@ -171,9 +166,12 @@ def affiche(recherche, ville, category=None, mode=1):
         fig.canvas.mpl_connect('pick_event', on_pick)
         plt.show()
 
-
+    if mode ==5: 
+        pass
+        # https://stackoverflow.com/questions/70628787/python-interactive-plotting-with-click-events
 
 
 if __name__ == "__main__":
-    affiche('maison', 'rennes', category= "logement",mode=4)    
+    # affiche('maison', 'rennes', category= "logement",mode=4)    
 
+    affiche('z650', 'rennes', category= "véhicule",mode=1)    

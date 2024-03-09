@@ -16,7 +16,7 @@ import webbrowser
 import numpy as np
 
 
-def scrapping(recherche, ville, category=None, rayon=None, nb_pages=5):
+def scrapping(recherche, ville, latitude, longitude,category=None, zip_code="" , rayon=None,nb_pages=5):
 
     items = list()
 
@@ -36,8 +36,9 @@ def scrapping(recherche, ville, category=None, rayon=None, nb_pages=5):
             print("page : ",page_index)
 
             page = browser.new_page()
-            page.goto(f"https://www.leboncoin.fr/recherche?category={id_category}&text={recherche}&locations={ville}__undefined_undefined_undefined_{rayon}&page={page_index}")
+            page.goto(f"https://www.leboncoin.fr/recherche?category={id_category}&text={recherche}&locations={ville}_{zip_code}__{latitude}_{longitude}_5000_{rayon}&page={page_index}")
 
+            print(page)
             # time.sleep(1)
 
             try:
@@ -71,8 +72,6 @@ def scrapping(recherche, ville, category=None, rayon=None, nb_pages=5):
         # Changer le chemin du fichier pour inclure le dossier "data"
         json_file_name = os.path.join(data_folder, f"{recherche}-{ville}-search-LBC.json")
 
-        print(f"Écriture des données dans le fichier : {json_file_name}")
-
         with open(json_file_name, mode="w") as jsonfile:
             json.dump(items, jsonfile, indent=2)
 
@@ -85,5 +84,5 @@ def scrapping(recherche, ville, category=None, rayon=None, nb_pages=5):
 
 
 if __name__ == "__main__":
-    scrapping('z650', 'rennes', nb_pages=1 )    
+    scrapping('z650', 'rennes', rayon = 10000, nb_pages=1 )    
 

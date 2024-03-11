@@ -13,6 +13,13 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 ![voir exmaple](https://img001.prntscr.com/file/img001/tfl2GI40TgaUAZHHj8mn8w.png)
 
 
+
+### Current Issues
+
+- Regression biaisée à cause de données non correspondante au mot clé maison/terrain
+- 
+
+
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -20,10 +27,6 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 
 - Python
 
-### Issues
-
-- Regression biaisée à cause dedonnées non correspondante au mot clé
-- 
 
 ### Installation
 

@@ -8,6 +8,7 @@ from serivces.serviceScrapping import scrapping
 from serivces.serviceTraitement import traitement
 from serivces.serviceAffichage import affiche
 from serivces.serviceVille import verif,zip_coordonnees
+from serivces.serviceCategory import id_cat
 
 class FenetreRecherche(tk.Tk):
     def __init__(self):
@@ -35,8 +36,8 @@ class FenetreRecherche(tk.Tk):
         # Sélecteur de catégorie
         label_categorie = ttk.Label(cadre, text="Catégorie :")
         label_categorie.grid(row=2, column=0, padx=5, pady=5)
-        self.choix_categorie = ttk.Combobox(cadre, values=["Logement", "Véhicule", "Aucune"], width=27)
-        self.choix_categorie.current(0)  # Sélection par défaut
+        self.choix_categorie = ttk.Combobox(cadre, values=["VEHICULES", "Voitures", "Motos", "IMMOBILIER", "Ventes immobilières", "Locations", "Colocations", "Locations & Gîtes", "Aucune"])
+        self.choix_categorie.current(8)  # Sélection par défaut "Aucune"
         self.choix_categorie.grid(row=2, column=1, padx=5, pady=5)
 
         # Slider de rayon
@@ -66,8 +67,12 @@ class FenetreRecherche(tk.Tk):
     def rechercher(self):
         recherche = self.entry_search.get().lower()
         ville = self.entry_ville.get().lower()
-        choix_categorie= self.choix_categorie.get().lower()
+        choix_categorie= self.choix_categorie.get()
+        id_category = id_cat(choix_categorie)
+
         rayon = int(self.rayon_slider.get()*1000)
+        
+
 
         # Verifier si ville en base de données et 
         # Recuperer les coordonnées GPS
@@ -75,16 +80,16 @@ class FenetreRecherche(tk.Tk):
             print(f"Recherche en cours avec le terme '{recherche}' dans la ville '{ville}' dans la categorie '{choix_categorie}'")
 
             zip_code, latitude, longitude = zip_coordonnees(ville)
-            scrapping(recherche, ville, category=choix_categorie, zip_code=zip_code, rayon= rayon, latitude=latitude, longitude=longitude)
+            scrapping(recherche, ville, id_category, zip_code=zip_code, rayon= rayon, latitude=latitude, longitude=longitude)
             traitement(recherche , ville, latitude, longitude)
-            affiche(recherche, ville, category=choix_categorie)
+            affiche(recherche, ville, id_category)
 
         elif ville == "" :
             print(f"Recherche en cours avec le terme '{recherche}' dans toute la France dans la categorie '{choix_categorie}'")
 
-            scrapping(recherche, ville, category=choix_categorie, zip_code="", rayon= "", latitude="", longitude="")
+            scrapping(recherche, ville, category=id_category, zip_code="", rayon= "", latitude="", longitude="")
             traitement(recherche , ville, latitude="", longitude="")
-            affiche(recherche, ville, choix_categorie)
+            affiche(recherche, ville, id_category)
 
         else : 
             print("Nom de la ville non reconnu")

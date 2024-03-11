@@ -16,17 +16,10 @@ import webbrowser
 import numpy as np
 
 
-def scrapping(recherche, ville, latitude, longitude,category=None, zip_code="" , rayon=None,nb_pages=5):
+def scrapping(recherche, ville, id_category ="" , latitude="", longitude="", zip_code="" , rayon=None, nb_pages=5):
 
     items = list()
 
-    #https://durieux.me/projects/leboncoin.html
-    if category == "logement":
-        id_category=8 # IMMOBILIER
-    elif category == "véhicule":
-        id_category=1 # VEHICULES
-    else :
-        id_category=0 #autre
 
     with sync_playwright() as p:
         HEADLESS_MODE = True
@@ -84,5 +77,5 @@ def scrapping(recherche, ville, latitude, longitude,category=None, zip_code="" ,
 
 
 if __name__ == "__main__":
-    scrapping('z650', 'rennes', rayon = 10000, nb_pages=1 )    
+    scrapping('z650', 'rennes', 'Motos',rayon = 10000, nb_pages=1 )    
 

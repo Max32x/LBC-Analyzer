@@ -26,11 +26,7 @@ def affiche(recherche, ville, category=None, mode=1):
 
     data['first_publication_date'] = pd.to_datetime(data['first_publication_date'], format="%Y-%m-%d %H:%M:%S")
 
-    # Filtrage des données
-    filtered_data = data[(data['surface_hab'] <= 4000) &   
-                         (data['price'] > 15000)]
-    
-    filtered_data = data
+
 
     prix_min = 0
     prix_max = 1200000
@@ -38,12 +34,13 @@ def affiche(recherche, ville, category=None, mode=1):
     surface_max = 280
 
     # Ajout de la condition pour le critère
-    critere = ((filtered_data['price'] > prix_min) & (filtered_data['price'] < prix_max) & 
-               (filtered_data['surface_hab'] > surface_min) & (filtered_data['surface_hab'] < surface_max))
+    critere = ((data['price'] > prix_min) & (data['price'] < prix_max) & 
+               (data['surface_hab'] > surface_min) & (data['surface_hab'] < surface_max))
 
-    if category == 'logement':
+
+    if category in [8,9,10,11,12,13]:
         x_name = "surface_hab"
-    elif category == 'véhicule':
+    elif category in [1,2,3,4,5]:
         x_name = "kilometrage"
     else:
         x_name = "first_publication_date"
@@ -51,7 +48,7 @@ def affiche(recherche, ville, category=None, mode=1):
 
     if mode == 1: #option pas trop mal
 
-        fig = px.scatter(filtered_data, x=x_name, y='price', color='distance', size=critere.map({True: 0.5, False: 0.01}),
+        fig = px.scatter(data, x=x_name, y='price', color='distance', size=critere.map({True: 0.5, False: 0.01}),
                          labels={'surface_hab': 'Surface habitable', 'price': 'Prix', 'first_publication_date':'Date de publication', "kilometrage": 'Kilometrage'},
                          hover_data={'subject': True, 'url': True},
                          trendline="ols", trendline_scope="overall", trendline_color_override="black")
@@ -62,7 +59,7 @@ def affiche(recherche, ville, category=None, mode=1):
 
     elif mode ==2 : #fonctionne pas
         plt.figure()
-        sc = plt.scatter(filtered_data[x_name], filtered_data['price'], c=filtered_data['distance'], s=critere.map({True: 0.5, False: 0.01}))
+        sc = plt.scatter(data[x_name], data['price'], c=data['distance'], s=critere.map({True: 0.5, False: 0.01}))
         plt.xlabel(x_name)
         plt.ylabel('Prix')
         plt.colorbar(sc)
@@ -88,9 +85,9 @@ def affiche(recherche, ville, category=None, mode=1):
         from plotly.callbacks import Points, InputDeviceState
         points, state = Points(), InputDeviceState()
 
-        fig = go.FigureWidget([go.Scatter(x= filtered_data[x_name], y=filtered_data['price'], mode='markers')])
+        fig = go.FigureWidget([go.Scatter(x= data[x_name], y=data['price'], mode='markers')])
 
-        n = len(filtered_data)
+        n = len(data)
         scatter = fig.data[0]  
         colors = ['#a3a7e4'] * n
         scatter.marker.color = colors

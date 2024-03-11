@@ -20,6 +20,10 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 
 - Python
 
+### Issues
+
+- Regression biaisée à cause dedonnées non correspondante au mot clé
+- 
 
 ### Installation
 
@@ -100,6 +104,7 @@ C -->|Données Structurées| S2
 
 S2-->D
 D--> IHM(IHM - Tkinter)
+IHM--> V
 ```
 
 

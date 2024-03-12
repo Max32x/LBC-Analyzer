@@ -11,5 +11,7 @@ __pycache__
 
 !/data/*
 
-
+# pour pyIsntaller
 /build
+main.spec
+/dist

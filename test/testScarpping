@@ -1,12 +1,12 @@
 import json
 from pprint import pprint
-from unittest import TestCase, main
+import unittest
 import os 
 
 from services.serviceScrapping import scrapping
-from .services.serviceScrapping import scrapping
 
-class TestScrapping(TestCase):
+
+class TestScrapping(unittest.TestCase):
     def setUp(self):
         self.recherche = 'z650'
         self.ville = 'rennes'
@@ -42,5 +42,4 @@ class TestScrapping(TestCase):
 
 if __name__ == "__main__":
 
-#    main()
-    TestScrapping().test_scrapping()
+   unittest.main()

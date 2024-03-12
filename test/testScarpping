@@ -3,8 +3,8 @@ from pprint import pprint
 from unittest import TestCase, main
 import os 
 
-
 from services.serviceScrapping import scrapping
+from .services.serviceScrapping import scrapping
 
 class TestScrapping(TestCase):
     def setUp(self):

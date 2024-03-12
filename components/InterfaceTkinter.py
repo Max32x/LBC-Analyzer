@@ -47,7 +47,6 @@ class FenetreRecherche(tk.Tk):
         self.label_prix = ttk.Label(cadre, text="Rayon (km) :" )
         self.label_prix.grid(row=3, column=0, padx=5, pady=5)
 
-
         scale_lbl = tk.Label(cadre, textvariable=self.rayon_val)
         scale_lbl.grid(row=3, column=2, padx=5, pady=5)
         self.rayon_slider = ttk.Scale(cadre, from_=0, to=200, variable = self.rayon_val, orient=tk.HORIZONTAL, command=self.accept_whole_number_only)
@@ -57,12 +56,14 @@ class FenetreRecherche(tk.Tk):
         bouton_rechercher = ttk.Button(cadre, text="Rechercher", command=self.rechercher)
         bouton_rechercher.grid(row=4, column=0, columnspan=2, pady=10)
 
+        # Barre de chargement
+        self.progress_bar = ttk.Progressbar(cadre, orient="horizontal", length=200, mode="indeterminate")
+        self.progress_bar.grid(row=5, column=0, columnspan=2, pady=10)
+
     def accept_whole_number_only(self, e=None):
         value = self.rayon_slider.get()
         if int(value) != value:
             self.rayon_slider.set(round(value))
-
-
 
     def rechercher(self):
         recherche = self.entry_search.get().lower()
@@ -70,9 +71,13 @@ class FenetreRecherche(tk.Tk):
         choix_categorie= self.choix_categorie.get()
         id_category = id_cat(choix_categorie)
 
-        rayon = int(self.rayon_slider.get()*1000)
-        
+        print(choix_categorie)
+        print(id_category)
 
+        rayon = int(self.rayon_slider.get()*1000)
+
+        # Activation de la barre de chargement
+        self.progress_bar.start()
 
         # Verifier si ville en base de données et 
         # Recuperer les coordonnées GPS
@@ -87,14 +92,15 @@ class FenetreRecherche(tk.Tk):
         elif ville == "" :
             print(f"Recherche en cours avec le terme '{recherche}' dans toute la France dans la categorie '{choix_categorie}'")
 
-            scrapping(recherche, ville, category=id_category, zip_code="", rayon= "", latitude="", longitude="")
+            scrapping(recherche, ville, id_category, zip_code="", rayon= "", latitude="", longitude="")
             traitement(recherche , ville, latitude="", longitude="")
             affiche(recherche, ville, id_category)
 
         else : 
             print("Nom de la ville non reconnu")
 
-
+        # Désactivation de la barre de chargement
+        self.progress_bar.stop()
 
 
 if __name__ == "__main__":

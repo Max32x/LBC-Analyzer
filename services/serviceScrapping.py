@@ -29,10 +29,15 @@ def scrapping(recherche, ville, id_category ="" , latitude="", longitude="", zip
             print("page : ",page_index)
 
             page = browser.new_page()
-            page.goto(f"https://www.leboncoin.fr/recherche?category={id_category}&text={recherche}&locations={ville}_{zip_code}__{latitude}_{longitude}_5000_{rayon}&page={page_index}")
+
+            if id_category =='':
+                url = f"https://www.leboncoin.fr/recherche?text={recherche}&locations={ville}_{zip_code}__{latitude}_{longitude}_5000_{rayon}&page={page_index}"
+            else :
+                url = f"https://www.leboncoin.fr/recherche?category={id_category}&text={recherche}&locations={ville}_{zip_code}__{latitude}_{longitude}_5000_{rayon}&page={page_index}"
+
+            page.goto(url)
 
             print(page)
-            # time.sleep(1)
 
             try:
                 # time.sleep(2)

@@ -3,7 +3,8 @@ from pprint import pprint
 from unittest import TestCase, main
 import os 
 
-from serviceScrapping import scrapping # Assurez-vous d'importer votre module de scraping correctement
+
+from services.serviceScrapping import scrapping
 
 class TestScrapping(TestCase):
     def setUp(self):
@@ -40,4 +41,6 @@ class TestScrapping(TestCase):
         os.remove(json_file_name)
 
 if __name__ == "__main__":
-    main()
+
+#    main()
+    TestScrapping().test_scrapping()

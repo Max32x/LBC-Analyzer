@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import numpy as np
 
-from serivces.serviceScrapping import scrapping
-from serivces.serviceTraitement import traitement
-from serivces.serviceAffichage import affiche
-from serivces.serviceVille import verif,zip_coordonnees
-from serivces.serviceCategory import id_cat
+from services.serviceScrapping import scrapping
+from services.serviceTraitement import traitement
+from services.serviceAffichage import affiche
+from services.serviceVille import verif,zip_coordonnees
+from services.serviceCategory import id_cat
 
 class FenetreRecherche(tk.Tk):
     def __init__(self):

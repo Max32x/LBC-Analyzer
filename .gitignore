@@ -10,3 +10,6 @@ __pycache__
 *csv#
 
 !/data/*
+
+
+/build

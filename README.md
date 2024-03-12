@@ -63,10 +63,13 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 - [x] Create Services 
 - [X] Create Tkinter Interface
 - [X] Link Interface to services
-- [ ] Make an interractive output (hard) 
-- [ ] Add Docker ?
-- [ ] Add pipelines ?
+- [ ] Make an interractive output (hard)
+- [ ] Allow to filter collected data (exclude & strict included)
 - [ ] Test with Mocker
+- [ ] <del>Add Docker ?</del>
+- [ ] Create an executable.
+- [ ] Add pipelines to create executable
+
 
 
 

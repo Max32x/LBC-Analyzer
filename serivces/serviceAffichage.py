@@ -28,16 +28,6 @@ def affiche(recherche, ville, category=None, mode=1):
 
 
 
-    prix_min = 0
-    prix_max = 1200000
-    surface_min = 0
-    surface_max = 280
-
-    # Ajout de la condition pour le critère
-    critere = ((data['price'] > prix_min) & (data['price'] < prix_max) & 
-               (data['surface_hab'] > surface_min) & (data['surface_hab'] < surface_max))
-
-
     if category in [8,9,10,11,12,13]:
         x_name = "surface_hab"
     elif category in [1,2,3,4,5]:
@@ -48,7 +38,7 @@ def affiche(recherche, ville, category=None, mode=1):
 
     if mode == 1: #option pas trop mal
 
-        fig = px.scatter(data, x=x_name, y='price', color='distance', size=critere.map({True: 0.5, False: 0.01}),
+        fig = px.scatter(data, x=x_name, y='price', color='distance',
                          labels={'surface_hab': 'Surface habitable', 'price': 'Prix', 'first_publication_date':'Date de publication', "kilometrage": 'Kilometrage'},
                          hover_data={'subject': True, 'url': True},
                          trendline="ols", trendline_scope="overall", trendline_color_override="black")

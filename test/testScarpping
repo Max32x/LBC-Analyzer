@@ -3,7 +3,7 @@ from pprint import pprint
 from unittest import TestCase, main
 import os 
 
-import services.serviceScrapping  # Assurez-vous d'importer votre module de scraping correctement
+from serviceScrapping import scrapping # Assurez-vous d'importer votre module de scraping correctement
 
 class TestScrapping(TestCase):
     def setUp(self):
@@ -14,7 +14,7 @@ class TestScrapping(TestCase):
         self.nb_pages = 1
 
     def test_scrapping(self):
-        items = scrapping_module.scrapping(self.recherche, self.ville, self.id_category, rayon=self.rayon, nb_pages=self.nb_pages)
+        items = scrapping(self.recherche, self.ville, self.id_category, rayon=self.rayon, nb_pages=self.nb_pages)
 
         # Vérifiez si le résultat est une liste
         self.assertIsInstance(items, list)

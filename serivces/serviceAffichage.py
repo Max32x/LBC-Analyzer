@@ -49,7 +49,7 @@ def affiche(recherche, ville, category=None, mode=1):
 
     elif mode ==2 : #fonctionne pas
         plt.figure()
-        sc = plt.scatter(data[x_name], data['price'], c=data['distance'], s=critere.map({True: 0.5, False: 0.01}))
+        sc = plt.scatter(data[x_name], data['price'], c=data['distance'])
         plt.xlabel(x_name)
         plt.ylabel('Prix')
         plt.colorbar(sc)

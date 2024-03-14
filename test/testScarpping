@@ -1,0 +1,45 @@
+import json
+from pprint import pprint
+import unittest
+import os 
+
+from services.serviceScrapping import scrapping
+
+
+class TestScrapping(unittest.TestCase):
+    def setUp(self):
+        self.recherche = 'z650'
+        self.ville = 'rennes'
+        self.id_category = 'Motos'
+        self.rayon = 10000
+        self.nb_pages = 1
+
+    def test_scrapping(self):
+        items = scrapping(self.recherche, self.ville, self.id_category, rayon=self.rayon, nb_pages=self.nb_pages)
+
+        # Vérifiez si le résultat est une liste
+        self.assertIsInstance(items, list)
+
+        # Vérifiez si la liste n'est pas vide
+        self.assertGreater(len(items), 0)
+
+        # Vérifiez si le premier élément de la liste contient les clés attendues
+        expected_keys = {'category', 'creationDate', 'description', 'id', 'images', 'isUrgent', 'location', 'price', 'title', 'url'}
+        self.assertGreaterEqual(set(items[0].keys()), expected_keys)
+
+        # Vérifiez si le fichier JSON a été créé
+        json_file_name = f"{self.recherche}-{self.ville}-search-LBC.json"
+        self.assertTrue(os.path.isfile(json_file_name))
+
+        # Vérifiez le contenu du fichier JSON
+        with open(json_file_name, 'r') as jsonfile:
+            json_data = json.load(jsonfile)
+
+        self.assertGreater(len(json_data), 0)
+
+        # Supprimez le fichier JSON créé pendant le test
+        os.remove(json_file_name)
+
+if __name__ == "__main__":
+
+   unittest.main()

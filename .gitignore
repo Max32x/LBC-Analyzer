@@ -10,3 +10,8 @@ __pycache__
 *csv#
 
 !/data/*
+
+# pour pyIsntaller
+/build
+main.spec
+/dist

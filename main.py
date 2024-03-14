@@ -5,3 +5,6 @@ if __name__ == "__main__":
 
     app = FenetreRecherche()
     app.mainloop()
+
+
+    #  pyinstaller --onefile main.py

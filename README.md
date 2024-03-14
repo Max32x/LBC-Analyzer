@@ -13,6 +13,12 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 ![voir exmaple](https://img001.prntscr.com/file/img001/tfl2GI40TgaUAZHHj8mn8w.png)
 
 
+
+### Current Issues
+
+- Regression biaisée à cause de données non correspondante au mot clé maison/terrain
+
+
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -23,20 +29,10 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 
 ### Installation
 
-1. Clone the repo
    ```bash
    git clone https://github.com/Max32x/LBC-Analyzer
-   ```
-
-2. Install all the necessary libraries
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-   
-3. Execute the script
-
-   ```sh
+   cd LBC-Analyzer
+   pip install -r requierments.txt
    python "main.py" 
    ```
 
@@ -62,6 +58,10 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 - [ ] Add Docker ?
 - [ ] Add pipelines ?
 - [ ] Test with Mocker
+- [ ] <del>Add Docker ?</del>
+- [X] Create an executable.
+- [X] Add pipelines to create executable
+
 
 
 
@@ -102,6 +102,7 @@ C -->|Données Structurées| S2
 
 S2-->D
 D--> IHM(IHM - Tkinter)
+IHM--> V
 ```
 
 

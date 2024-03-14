@@ -23,6 +23,8 @@ def traitement(recherche, ville, latitude= None, longitude=None) :
     
     df = pd.read_json(json_file_name)
 
+    
+
 
     def extract_value(row, key):
         for dico in row["attributes"]:

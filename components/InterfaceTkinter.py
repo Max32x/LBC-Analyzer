@@ -1,8 +1,5 @@
 import tkinter as tk
 from tkinter import ttk
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import numpy as np
 
 from services.serviceScrapping import scrapping
 from services.serviceTraitement import traitement
@@ -26,6 +23,11 @@ class FenetreRecherche(tk.Tk):
         self.label_recherche.grid(row=0, column=0, padx=5, pady=5)
         self.entry_search = ttk.Entry(cadre, width=30)
         self.entry_search.grid(row=0, column=1, padx=5, pady=5)
+
+        # Ajout de la case à cocher
+        self.checkbox_var = tk.BooleanVar()  # Variable pour suivre l'état de la case à cocher
+        self.checkbox = ttk.Checkbutton(cadre, text="Recherche dans le titre uniquement", variable=self.checkbox_var)
+        self.checkbox.grid(row=0, column=2, padx=5, pady=5)
 
         # Barre de recherche pour la ville
         label_ville = ttk.Label(cadre, text="Ville (Toute la France = Laisser vide) :")
@@ -70,6 +72,8 @@ class FenetreRecherche(tk.Tk):
         ville = self.entry_ville.get().lower()
         choix_categorie= self.choix_categorie.get()
         id_category = id_cat(choix_categorie)
+        filtre_bool = self.checkbox_var.get()
+
 
         print(choix_categorie)
         print(id_category)
@@ -85,7 +89,7 @@ class FenetreRecherche(tk.Tk):
             print(f"Recherche en cours avec le terme '{recherche}' dans la ville '{ville}' dans la categorie '{choix_categorie}'")
 
             zip_code, latitude, longitude = zip_coordonnees(ville)
-            scrapping(recherche, ville, id_category, zip_code=zip_code, rayon= rayon, latitude=latitude, longitude=longitude)
+            scrapping(recherche, ville, id_category, zip_code=zip_code, rayon= rayon, latitude=latitude, longitude=longitude, filtre_bool=filtre_bool)
             traitement(recherche , ville, latitude, longitude)
             affiche(recherche, ville, id_category)
 

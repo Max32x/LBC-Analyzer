@@ -1,22 +1,11 @@
+import os
 import json
-from pprint import pprint
 
 from bs4 import BeautifulSoup
 from playwright.sync_api import sync_playwright
-import os
-import pandas as pd
-import math
-import time 
-import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.express as px
-import plotly.graph_objs as go
-
-import webbrowser
-import numpy as np
 
 
-def scrapping(recherche, ville, id_category ="" , latitude="", longitude="", zip_code="" , rayon=None, nb_pages=5):
+def scrapping(recherche, ville, id_category ="" ,zip_code="" , rayon=None,  latitude="", longitude="", filtre_bool= False ,nb_pages=5):
 
     items = list()
 
@@ -34,6 +23,9 @@ def scrapping(recherche, ville, id_category ="" , latitude="", longitude="", zip
                 url = f"https://www.leboncoin.fr/recherche?text={recherche}&locations={ville}_{zip_code}__{latitude}_{longitude}_5000_{rayon}&page={page_index}"
             else :
                 url = f"https://www.leboncoin.fr/recherche?category={id_category}&text={recherche}&locations={ville}_{zip_code}__{latitude}_{longitude}_5000_{rayon}&page={page_index}"
+
+            if filtre_bool:  
+                url += "&search_in=subject"
 
             page.goto(url)
 

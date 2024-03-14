@@ -32,7 +32,7 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
    ```bash
    git clone https://github.com/Max32x/LBC-Analyzer
    cd LBC-Analyzer
-   pip install -r requierments.txt
+   pip install -r requirements.txt
    python "main.py" 
    ```
 
@@ -53,12 +53,9 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 - [X] Create Tkinter Interface
 - [X] Link Interface to services
 - [ ] Make an interractive output (hard) 
-- [ ] Add filter
-
-- [ ] Add Docker ?
-- [ ] Add pipelines ?
+- [X] Add filter
 - [ ] Test with Mocker
-- [ ] <del>Add Docker ?</del>
+- [X] <del>Add Docker ?</del>
 - [X] Create an executable.
 - [X] Add pipelines to create executable
 

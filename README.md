@@ -68,8 +68,8 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 - [ ] Allow to filter collected data (exclude & strict included)
 - [ ] Test with Mocker
 - [ ] <del>Add Docker ?</del>
-- [ ] Create an executable.
-- [ ] Add pipelines to create executable
+- [X] Create an executable.
+- [X] Add pipelines to create executable
 
 
 

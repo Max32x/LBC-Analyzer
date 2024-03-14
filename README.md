@@ -30,20 +30,10 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 
 ### Installation
 
-1. Clone the repo
    ```bash
    git clone https://github.com/Max32x/LBC-Analyzer
-   ```
-
-2. Install all the necessary libraries
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-   
-3. Execute the script
-
-   ```sh
+   cd LBC-Analyzer
+   pip install -r requierments.txt
    python "main.py" 
    ```
 

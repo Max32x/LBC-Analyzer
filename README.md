@@ -17,7 +17,6 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 ### Current Issues
 
 - Regression biaisée à cause de données non correspondante au mot clé maison/terrain
-- 
 
 
 <!-- GETTING STARTED -->

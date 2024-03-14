@@ -1,22 +1,14 @@
-import json
-from pprint import pprint
-
-from bs4 import BeautifulSoup
-from playwright.sync_api import sync_playwright
 import os
 import pandas as pd
-import math
-import time 
+
 import matplotlib.pyplot as plt
-import seaborn as sns
 import plotly.express as px
 import plotly.graph_objs as go
+import plotly.graph_objects as go
 
-import webbrowser
 import numpy as np
 
-import dash
-import plotly.graph_objects as go
+
 
 def affiche(recherche, ville, category=None, mode=1):
 

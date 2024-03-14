@@ -1,18 +1,5 @@
-import json
-from pprint import pprint
-
-from bs4 import BeautifulSoup
-from playwright.sync_api import sync_playwright
 import os
 import pandas as pd
-import math
-import time 
-import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.express as px
-import plotly.graph_objs as go
-
-import webbrowser
 import numpy as np
 
 
@@ -55,11 +42,12 @@ def traitement(recherche, ville, latitude= None, longitude=None) :
     df["latitude"] = df.apply(lambda row: extract_value2(row, "lat"), axis=1)
 
     if latitude and longitude : 
-        df["distance"] = df.apply(lambda row: math.sqrt((row["latitude"] - latitude)**2 + (row["longitude"] - longitude)**2), axis=1)
+        df["distance"] = df.apply(lambda row: np.sqrt((row["latitude"] - latitude)**2 + (row["longitude"] - longitude)**2), axis=1)
     else :
         df["distance"] = df.apply(lambda x:None, axis=1)
          
-
+    #Conversion en km
+    df["distance"] = 111 * df["distance"]
 
     csv_file_name = os.path.join("data_search", f"{recherche}-{ville}-search-LBC.csv")
     df.to_csv (csv_file_name, index = None)

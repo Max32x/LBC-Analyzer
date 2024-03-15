@@ -54,7 +54,7 @@ Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de r
 - [X] Link Interface to services
 - [ ] Make an interractive output (hard) 
 - [X] Add filter
-- [ ] Test with Mocker
+- [X] <del>Test with Mocker</del>
 - [X] <del>Add Docker ?</del>
 - [X] Create an executable.
 - [X] Add pipelines to create executable

@@ -68,6 +68,8 @@ def scrapping(recherche, ville, id_category ="" ,zip_code="" , rayon=None,  lati
         print("Fichier enregistré dans :", os.path.abspath(json_file_name))
         print("Nombre d'annonces :", len(items))
         browser.close()
+
+        return items
         
 
 

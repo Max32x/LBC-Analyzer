@@ -54,6 +54,5 @@ def traitement(recherche, ville, latitude= None, longitude=None) :
 
     print("Traitement fini")
 
-if __name__ == "__main__":
-    traitement('z650', 'rennes')    
+  
 

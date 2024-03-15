@@ -1,4 +1,4 @@
-name: PyInstaller Build
+name: Create executable
 
 on:
   push:

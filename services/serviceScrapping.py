@@ -60,7 +60,7 @@ def scrapping(
                 items += datas["props"]["pageProps"]["searchData"]["ads"]
 
             except:
-                print(f"Erreur sur la page {page_index}")
+                print(f"La page {page_index} est vide ou bloquée")
                 pass
 
         # Créer le dossier "data_seach" s'il n'existe pas

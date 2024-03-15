@@ -98,8 +98,8 @@ S --> C
 C -->|Données Structurées| S2
 
 S2-->D
-D--> IHM(IHM - Tkinter)
-IHM--> V
+D--> IHM2(IHM - Page Web)
+IHM(IHM - Tkinter)--> V
 ```
 
 

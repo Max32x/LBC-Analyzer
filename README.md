@@ -8,7 +8,12 @@
 Le but de ce programme est de repérer de bonnes offres sur LeBonCoin à l'aide d'outils statistiques.
 
 On définit un terme de recherche, et une localisation. Le logiciel s'occupe de repertoirer toutes les annonces correspondantes et faire une regression sur ces données.
-Les points les plus éloignées de la droite de regression sont les bonnes affaires
+Les points les plus éloignées de la droite de regression sont les bonnes affaires.
+
+On regresse 
+- le prix sur le kilometreage lorsqu'il s'agit d'un véhicule
+- le prix sur la surface habitable lorsqu'il s'agit d'un logement
+- le prix sur la date de publication sinon
 
 ![voir exmaple](https://img001.prntscr.com/file/img001/tfl2GI40TgaUAZHHj8mn8w.png)
 
@@ -42,7 +47,7 @@ Les points les plus éloignées de la droite de regression sont les bonnes affai
 
 - Renseigner un terme de recherche
 - Renseigner une ville
-- Choisir une categorie (seules celle jugées utiles y sont)
+- Choisir une categorie, laisser 'aucune' sinon
 - Choisir un rayon de recherche
 - Admirer le travail
 

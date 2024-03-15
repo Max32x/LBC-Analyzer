@@ -7,8 +7,8 @@
 ## Description
 Le but de ce programme est de repérer de bonnes offres sur LeBonCoin à l'aide d'outils statistiques.
 
-On définit un terme de recherche, et un localisation. Le logiciel s'occupe de repertoirer toute les aannonces correspondantes et faire une regression.
-Il n'y a plus qu'à selectionner les points les plus eloignés de la droite de regression
+On définit un terme de recherche, et une localisation. Le logiciel s'occupe de repertoirer toutes les annonces correspondantes et faire une regression sur ces données.
+Les points les plus éloignées de la droite de regression sont les bonnes affaires
 
 ![voir exmaple](https://img001.prntscr.com/file/img001/tfl2GI40TgaUAZHHj8mn8w.png)
 

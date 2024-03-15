@@ -6,15 +6,15 @@ from playwright.sync_api import sync_playwright
 
 
 def scrapping(
-    recherche,
-    ville,
-    id_category="",
-    zip_code="",
+    recherche: str,
+    ville: str,
+    id_category: str = "",
+    zip_code: str = "",
     rayon=None,
     latitude="",
     longitude="",
-    filtre_bool=False,
-    nb_pages=5,
+    filtre_bool: bool = False,
+    nb_pages: int = 5,
 ):
     items = list()
 

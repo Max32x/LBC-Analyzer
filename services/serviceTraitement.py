@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-def traitement(recherche, ville, latitude=None, longitude=None):
+def traitement(recherche: str, ville: str, latitude=None, longitude=None):
     json_file_name = os.path.join("data_search", f"{recherche}-{ville}-search-LBC.json")
 
     df = pd.read_json(json_file_name)

@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 import plotly.graph_objs as go
 
 
-def affiche(recherche, ville, category=None, mode=1):
+def affiche(recherche: str, ville: str, category=None, mode=1):
     # Chargement des données
     csv_file_name = os.path.join("data_search", f"{recherche}-{ville}-search-LBC.csv")
     data = pd.read_csv(csv_file_name)

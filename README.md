@@ -10,8 +10,8 @@ Le but de ce programme est de repérer de bonnes offres sur LeBonCoin à l'aide 
 On définit un terme de recherche, et une localisation. Le logiciel s'occupe de repertoirer toutes les annonces correspondantes et faire une regression sur ces données.
 Les points les plus éloignées de la droite de regression sont les bonnes affaires.
 
-On regresse 
-- le prix sur le kilometreage lorsqu'il s'agit d'un véhicule
+On regresse :
+- le prix sur le kilometrage lorsqu'il s'agit d'un véhicule
 - le prix sur la surface habitable lorsqu'il s'agit d'un logement
 - le prix sur la date de publication sinon
 

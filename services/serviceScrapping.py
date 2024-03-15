@@ -70,11 +70,5 @@ def scrapping(recherche, ville, id_category ="" ,zip_code="" , rayon=None,  lati
         browser.close()
 
         return items
-        
 
-
-
-
-if __name__ == "__main__":
-    scrapping('z650', 'rennes', 'Motos',rayon = 10000, nb_pages=1 )    
 

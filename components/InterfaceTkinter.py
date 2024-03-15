@@ -103,9 +103,6 @@ class FenetreRecherche(tk.Tk):
         id_category = id_cat(choix_categorie)
         filtre_bool = self.checkbox_var.get()
 
-        print(choix_categorie)
-        print(id_category)
-
         rayon = int(self.rayon_slider.get() * 1000)
 
         # Activation de la barre de chargement

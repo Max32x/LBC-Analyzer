@@ -14,9 +14,9 @@ Les points les plus éloignées de la droite de regression sont les bonnes affai
 
 
 
-### Current Issues
+### Known Issues
 
-- Regression biaisée à cause de données non correspondante au mot clé maison/terrain
+- Parfois la regression biaisée à cause de données non correspondante au mot clé 
 
 
 <!-- GETTING STARTED -->

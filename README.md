@@ -21,7 +21,7 @@ On regresse :
 
 ### Known Issues
 
-- Parfois la regression biaisée à cause de données non correspondante au mot clé 
+- Parfois la regression est biaisée à cause de données non correspondante au mot clé.
 
 
 <!-- GETTING STARTED -->

@@ -21,7 +21,7 @@ On regresse :
 
 ### Known Issues
 
-- Parfois la regression est biaisée à cause de données non correspondante au mot clé.
+- Parfois la regression est biaisée à cause de données non correspondante au mot clé. (Exemple: recherche maison trouve des terrains)
 
 
 <!-- GETTING STARTED -->
@@ -62,7 +62,7 @@ On regresse :
 - [X] Add filter
 - [X] <del>Test with Mocker</del>
 - [X] <del>Add Docker ?</del>
-- [X] Create an executable.
+- [X] Create an executable. (doesn't work)
 - [X] Add pipelines to create executable
 
 
@@ -110,7 +110,7 @@ IHM(IHM - Tkinter)--> V
 
 
 ## Project status
-The project is still in developpment;
+The developpment of the project is over;
 
 
 
